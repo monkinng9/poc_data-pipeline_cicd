@@ -24,13 +24,13 @@ jobs:
         uses: actions/checkout@v4 # Action to check out your repository code
 
       - name: Verify Python version
-        run: python --version # Confirm the Python version within the container
+        run: python3 --version # Confirm the Python version within the container
 
       - name: Verify PySpark installation
         run: pyspark --version # Confirm PySpark is accessible
 
       - name: Verify Polars installation
-        run: python -c "import polars; print(polars.__version__)" # Confirm Polars is installed
+        run: python3 -c "import polars; print(polars.__version__)" # Confirm Polars is installed
 
       - name: Run unit tests
         # This command will discover and run your unit tests
