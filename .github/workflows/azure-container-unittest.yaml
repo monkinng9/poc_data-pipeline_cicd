@@ -1,0 +1,38 @@
+name: Manual PySpark Polars Delta Lake Unit Tests
+
+on:
+  # This section configures manual triggering
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: false
+        default: 'info'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest # The GitHub-hosted runner that will host your Docker container
+    container: chayutt41/pyspark-polars-delta_lake:1.0.0 # Specify the Docker image to use for this job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Action to check out your repository code
+
+      - name: Verify Python version
+        run: python --version # Confirm the Python version within the container
+
+      - name: Verify PySpark installation
+        run: pyspark --version # Confirm PySpark is accessible
+
+      - name: Verify Polars installation
+        run: python -c "import polars; print(polars.__version__)" # Confirm Polars is installed
+
+      - name: Run unit tests
+        # This command will discover and run your unit tests
+        # Ensure your test files are located where 'unittest discover' can find them
+        run: python3 -m unittest discover
