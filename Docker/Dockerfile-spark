@@ -43,6 +43,9 @@ ENV DATA_DIR=/opt/spark/work-dir/data
 ENV SCRIPTS_DIR=/opt/spark/work-dir/scripts
 # ENV LOG_DIR=/opt/spark/work-dir/logs
 
+# Install Databricks Asset Bundle
+RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
 # Expose JupyterLab port
 EXPOSE 8888
 
